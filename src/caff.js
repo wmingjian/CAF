@@ -26,7 +26,6 @@ CAF.Service
 
 */
 
-
 /*
 CAF
 */
@@ -36,7 +35,24 @@ window.CAF = {
 	version: 1
 };
 
-CAF.extend = function(){
+CAF.extend = function(superClass, classImp){
+	var clazz = function(){
+		if(this.constructor == "function"){
+			this.constructor.apply(this, arguments);
+		}
+	};
+	clazz.prototype = new superClass();
+	var type = typeof classImp;
+	if(type == "object"){
+		for(var k in classImp){
+			clazz[k] = classImp[k];
+		}
+	}else if(type == "function"){
+		classImp.apply(clazz);	
+	}else{
+		throw "param 'classImp' error!";
+	}
+	return clazz;
 };
 
 CAF.bind = function(){
