@@ -33,12 +33,12 @@ CAF
 
 
 window.CAF = {
-	Version:1
-}
+	version: 1
+};
 
-CAF.extend = function(){}
+CAF.extend = function(){
+};
 
-CAF.bind = function(){}
-
-
+CAF.bind = function(){
+};
 
