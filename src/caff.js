@@ -75,3 +75,26 @@ CAF.bind = function(func, obj){
 	};
 };
 
+/**
+ *
+ * @param dest {Object}
+ * @param src {Object}
+ * @param flag {Boolean}
+ */
+CAF.cloneTo = function(dest, src, flag){
+	if(dest && src && typeof src == 'object'){
+		if(flag){
+		    for(var k in src){
+		        if(!(k in dest)){
+		            dest[k] = src[k];
+		        }
+		    }
+		}else{
+		    for(var k in src){
+		        dest[k] = src[k];
+		    }
+		}
+    }
+    return dest;
+};
+
