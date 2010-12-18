@@ -1,0 +1,101 @@
+CAF.Service = {
+	Accelerometer:{
+		acceleration:{
+			x:function(){
+			},
+			y:function(){
+			},
+			z:function(){
+			},
+			timestamp:new Date().getTime()
+		},
+		getCurrent:function(){
+		},
+		watch:{
+			on:function(){
+			},
+			off:function(){
+			}
+		}
+	},
+	Audio:{
+		muteOther:function(){
+		},
+		value:{
+			down:function(){
+			},
+			up:function(){
+			}
+		}
+	},
+	Camera:{
+		devices:function(){
+			//var devices = xxxx;
+			//return devices;
+		},
+		flash:function(devices.id){
+		},
+		takePhoto:function(devices.id){
+		}
+	},
+	Compass:{
+		heading:{
+			toward:function(){
+			},
+			horizontal:function(){
+			}
+		},
+		getCurrent:function(){
+		},
+		watch:{
+			on:function(){
+			},
+			off:function(){
+			}
+		}
+	},
+	Device:{
+		model:function(){
+		},
+		name:function(){
+		},
+		platform:function(){
+		},
+		version:function(){
+		}
+	},
+	Error:{
+		ignore:function(){
+		},
+		log:function(){
+		}
+	},
+	File:{
+		reader:function(filePath){
+			return CAF.IO.reader(filePath);
+		},
+		write:function(filePath){
+			return CAF.IO.reader(filePath);
+		}
+	},
+	Geolocation:{
+		isPrecise:function(){
+		},
+		getCurrent:function(){
+			//if isPrecise
+			//	todo
+			//else
+			//	if Network.phone()
+		}
+	},
+	Mic:{
+		on::function(){
+		},
+		off::function(){
+		}
+	},
+	Network{
+		wifi:{},
+		phone:{}
+	}
+};
