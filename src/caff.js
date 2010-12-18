@@ -1,6 +1,4 @@
-just another js frameworks for mobile dev
-
-
+/*
 
 CAF
 	oop
@@ -25,6 +23,22 @@ CAF.UI.Layout
 CAF.UI.Text
 
 CAF.Service
+
+*/
+
+
+/*
+CAF
+*/
+
+
+window.CAF = {
+	Version:1
+}
+
+CAF.extend = function(){}
+
+CAF.bind = function(){}
 
 
 
