@@ -2,16 +2,30 @@ just another js frameworks for mobile dev
 
 CAF
 CAF.app
+	AppManager
 	Application
 	Controller
-	Route
-	Histroy
+	ObjectController
+	ArrayController
+	TreeController
+	Viewport
 CAF.event
+CAF.element
+	Element
 CAF.intl
 CAF.montion
 CAF.data
 	Model
 	Store
+	DataSource
+	JsonPSource
+	JsonSource
+	AjaxSource
+	LocalStorageSource
+	WebSQLSource
+	Query
+	QueryParser
+	Fixture
 CAF.ui
 	View
 		Container
@@ -19,6 +33,8 @@ CAF.ui
 CAF.service
 CAF.util
 	Observable
-
-
-
+	Observer
+	ObserverSet
+	Object
+	Binding
+	AbstractManager
