@@ -78,7 +78,7 @@ CAF.cloneTo(CAF, {
 	 * @param classImp {Object|Function} 当前类的实现
 	 * @return {Class} 当前类
 	 */
-	CAFend : function(SuperClass, classImp){
+	extend : function(SuperClass, classImp){
 		var clazz = function(){
 			if(this.init == "function"){
 				this.init.apply(this, arguments);
