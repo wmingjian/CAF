@@ -9,6 +9,7 @@
  */
 
 CAF.util.ObserverSet = CAF.extend(Array, {
+	bubble: false,
 	init: function(observable, eventType) {
 		this.observable = observable;
 		this.eventType = eventType;

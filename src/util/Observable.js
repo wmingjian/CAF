@@ -45,7 +45,7 @@ CAF.util.Obseravable = CAF.extend(Object, {
 			parent = me.getBubbleTarget && me.getBubbleTarget();
 			if(parent && parent.isObservable) {
 				if(!parent.events[ename] || !parent.events[ename].bubble) {
-					me._bubble(ename);
+					me.bubble(ename);
 				}
 				parent.dispatchEvent(parent, a);
 			}
@@ -54,7 +54,10 @@ CAF.util.Obseravable = CAF.extend(Object, {
 			ev.dispatchEvent.apply(ev, a);
 		}
 	},
-	_bubble: function(events) {
+	/**
+	 * @private
+	 */
+	bubble: function(events) {
 		var me = this;
         if (!CAF.isEmpty(events)) {
             events = CAF.isArray(events) ? events: CAF.toArray(arguments);

@@ -10,12 +10,12 @@ var CAF = {
  *
  * @param dest {Object}
  * @param src {Object}
- * @param flag {Boolean}
+ * @param conditional {Boolean}
  */
-CAF.cloneTo = function(dest, src, flag){
+CAF.cloneTo = function(dest, src, conditional){
 	var k;
 	if(dest && src && typeof src == 'object'){
-		if(flag){
+		if(conditional){
 		    for(k in src){
 		        if(!(k in dest)){
 		            dest[k] = src[k];
