@@ -74,3 +74,9 @@ CAF.util.Obseravable = CAF.extend(Object, {
         }
 	}
 });
+
+CAF.override(CAF.util.Observable, {
+    on: CAF.util.Observable.prototype.addListener,
+    un: CAF.util.Observable.prototype.removeListener,
+	fire: CAF.util.Observable.prototype.dispatchEvent
+});

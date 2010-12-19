@@ -3,7 +3,7 @@ CAF
 */
 
 var CAF = {
-	version: 1
+    version: 1
 };
 
 /**
@@ -12,65 +12,89 @@ var CAF = {
  * @param src {Object}
  * @param conditional {Boolean}
  */
-CAF.cloneTo = function(dest, src, conditional){
-	var k;
-	if(dest && src && typeof src == 'object'){
-		if(conditional){
-		    for(k in src){
-		        if(!(k in dest)){
-		            dest[k] = src[k];
-		        }
-		    }
-		}else{
-		    for(k in src){
-		        dest[k] = src[k];
-		    }
-		}
+CAF.cloneTo = function(dest, src, conditional) {
+    var k;
+    if (dest && src && typeof src == 'object') {
+        if (conditional) {
+            for (k in src) {
+                if (! (k in dest)) {
+                    dest[k] = src[k];
+                }
+            }
+        } else {
+            for (k in src) {
+                dest[k] = src[k];
+            }
+        }
     }
     return dest;
 };
 
 CAF.cloneTo(CAF, {
-	/**
+    //on DOM ready
+    onReady: function(fn, scope) {},
+
+    /**
 	 * 动态绑定函数对象中this的值
 	 *
 	 * @param func {Function}
 	 * @param obj {Object}
 	 * @return {Function}
 	 */
-	bind : function(func, obj){
-		return function(){
-			return func.apply(obj, arguments);
-		};
-	},
-	/**
+    bind: function(func, obj) {
+        return function() {
+            return func.apply(obj, arguments);
+        };
+    },
+    /**
 	 * 类继承语法封装
 	 *
 	 * @param SuperClass {Class} 父类的名字
 	 * @param classImp {Object|Function} 当前类的实现
 	 * @return {Class} 当前类
 	 */
-	extend : function(SuperClass, classImp){
-		var clazz = function(){
-			if(this.init == "function"){
-				this.init.apply(this, arguments);
-			}
-		};
-		clazz.prototype = new SuperClass();
-		var type = typeof classImp;
-		if(type == "object"){
-			for(var k in classImp){
-				clazz[k] = classImp[k];
-			}
-		}else if(type == "function"){
-			classImp.apply(clazz);	
-		}else{
-			throw "param 'classImp' error!";
-		}
-		return clazz;
+    extend: function(SuperClass, classImp) {
+        var clazz = function() {
+            if (this.init == "function") {
+                this.init.apply(this, arguments);
+            }
+        };
+        clazz.prototype = new SuperClass();
+        var type = typeof classImp;
+        if (type == "object") {
+            for (var k in classImp) {
+                clazz[k] = classImp[k];
+            }
+        } else if (type == "function") {
+            classImp.apply(clazz);
+        } else {
+            throw "param 'classImp' error!";
+        }
+        return clazz;
+    },
+
+    /**
+	     * Adds a list of functions to the prototype of an existing class, overwriting any existing methods with the same name.
+	     * Usage:<pre><code>
+	Ext.override(MyClass, {
+	newMethod1: function(){
+	    // etc.
 	},
-	
-	/**
+	newMethod2: function(foo){
+	    // etc.
+	}
+	});
+	       </code></pre>
+	     * @param {Object} origclass The class to override
+	     * @param {Object} overrides The list of functions to add to origClass.  This should be specified as an object literal
+	     * containing one or more methods.
+	     * @method override
+	     */
+    override: function(origclass, overrides) {
+        CAF.cloneTo(origclass.prototype, overrides, false);
+    },
+
+    /**
      * <p>Returns true if the passed value is empty.</p>
      * <p>The value is deemed to be empty if it is<div class="mdetail-params"><ul>
      * <li>null</li>
@@ -82,10 +106,10 @@ CAF.cloneTo(CAF, {
      * @param {Boolean} allowBlank (optional) true to allow empty strings (defaults to false)
      * @return {Boolean}
      */
-    isEmpty : function(value, allowBlank) {
-        var isNull       = value === null,
-            emptyArray   = (CAF.isArray(value) && !value.length),
-            blankAllowed = !allowBlank ? value === '' : false;
+    isEmpty: function(value, allowBlank) {
+        var isNull = value === null,
+        emptyArray = (CAF.isArray(value) && !value.length),
+        blankAllowed = !allowBlank ? value === '': false;
 
         return isNull || emptyArray || blankAllowed;
     },
@@ -95,7 +119,7 @@ CAF.cloneTo(CAF, {
      * @param {Mixed} value The value to test
      * @return {Boolean}
      */
-    isArray : function(v) {
+    isArray: function(v) {
         return Object.prototype.toString.apply(v) === '[object Array]';
     },
 
@@ -104,7 +128,7 @@ CAF.cloneTo(CAF, {
      * @param {Object} object The object to test
      * @return {Boolean}
      */
-    isDate : function(v) {
+    isDate: function(v) {
         return Object.prototype.toString.apply(v) === '[object Date]';
     },
 
@@ -113,8 +137,8 @@ CAF.cloneTo(CAF, {
      * @param {Mixed} value The value to test
      * @return {Boolean}
      */
-    isObject : function(v) {
-        return !!v && !v.tagName && Object.prototype.toString.call(v) === '[object Object]';
+    isObject: function(v) {
+        return !! v && !v.tagName && Object.prototype.toString.call(v) === '[object Object]';
     },
 
     /**
@@ -122,7 +146,7 @@ CAF.cloneTo(CAF, {
      * @param {Mixed} value The value to test
      * @return {Boolean}
      */
-    isPrimitive : function(v) {
+    isPrimitive: function(v) {
         return CAF.isString(v) || CAF.isNumber(v) || CAF.isBoolean(v);
     },
 
@@ -131,7 +155,7 @@ CAF.cloneTo(CAF, {
      * @param {Mixed} value The value to test
      * @return {Boolean}
      */
-    isFunction : function(v) {
+    isFunction: function(v) {
         return Object.prototype.toString.apply(v) === '[object Function]';
     },
 
@@ -140,7 +164,7 @@ CAF.cloneTo(CAF, {
      * @param {Mixed} value The value to test
      * @return {Boolean}
      */
-    isNumber : function(v) {
+    isNumber: function(v) {
         return Object.prototype.toString.apply(v) === '[object Number]' && isFinite(v);
     },
 
@@ -149,7 +173,7 @@ CAF.cloneTo(CAF, {
      * @param {Mixed} value The value to test
      * @return {Boolean}
      */
-    isString : function(v) {
+    isString: function(v) {
         return typeof v === 'string';
     },
 
@@ -158,7 +182,7 @@ CAF.cloneTo(CAF, {
      * @param {Mixed} value The value to test
      * @return {Boolean}
      */
-    isBoolean : function(v) {
+    isBoolean: function(v) {
         return Object.prototype.toString.apply(v) === '[object Boolean]';
     },
 
@@ -167,8 +191,8 @@ CAF.cloneTo(CAF, {
      * @param {Mixed} value The value to test
      * @return {Boolean}
      */
-    isElement : function(v) {
-        return v ? !!v.tagName : false;
+    isElement: function(v) {
+        return v ? !!v.tagName: false;
     },
 
     /**
@@ -176,19 +200,19 @@ CAF.cloneTo(CAF, {
      * @param {Mixed} value The value to test
      * @return {Boolean}
      */
-    isDefined : function(v){
+    isDefined: function(v) {
         return typeof v !== 'undefined';
     },
 
-	_nextGUID : 0,
-	guidFor : function(obj) {
-		// special cases where we don't want to add a key to object
-	    if (obj === undefined) return "(undefined)";
-	    if (obj === null) return '(null)';
-		return this._nextGUID++;
-	},
-	
-	/**
+    _nextGUID: 0,
+    guidFor: function(obj) {
+        // special cases where we don't want to add a key to object
+        if (obj === undefined) return "(undefined)";
+        if (obj === null) return '(null)';
+        return this._nextGUID++;
+    },
+
+    /**
      * Converts any iterable (numeric indices and a length property) into a true array
      * Don't use this on strings. IE doesn't support "abc"[0] which this implementation depends on.
      * For strings, use this instead: "abc".match(/./g) => [a,b,c];
@@ -197,7 +221,7 @@ CAF.cloneTo(CAF, {
      * @param {Number} end a number that specifies where to end the selection.
      * @return (Array) array
      */
-     toArray : function(array, start, end) {
+    toArray: function(array, start, end) {
         return Array.prototype.slice.call(array, start || 0, end || array.length);
-     }
+    }
 });
