@@ -1,32 +1,4 @@
 /*
-
-CAF
-	oop
-
-CAF.Event
-CAF.Element
-
-CAF.Montion
-CAF.Intl
-CAF.IO
-	-json
-	-ajax
-	-store
-
-
-CAF.Controller
-CAF.View
-CAF.Model
-
-CAF.UI.Control
-CAF.UI.Layout
-CAF.UI.TCAF
-
-CAF.Service
-
-*/
-
-/*
 CAF
 */
 

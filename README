@@ -1,30 +1,24 @@
 just another js frameworks for mobile dev
 
-
-
 CAF
-	oop
-
-CAF.Event
-CAF.Element
-
-CAF.Montion
-CAF.Intl
-CAF.IO
-	-json
-	-ajax
-	-store
-
-
-CAF.Controller
-CAF.View
-CAF.Model
-
-CAF.UI.Control
-CAF.UI.Layout
-CAF.UI.Text
-
-CAF.Service
+CAF.app
+	Application
+	Controller
+	Route
+	Histroy
+CAF.event
+CAF.intl
+CAF.montion
+CAF.data
+	Model
+	Store
+CAF.ui
+	View
+		Container
+		Component
+CAF.service
+CAF.util
+	Observable
 
 
 
