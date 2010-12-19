@@ -186,5 +186,18 @@ CAF.cloneTo(CAF, {
 	    if (obj === undefined) return "(undefined)";
 	    if (obj === null) return '(null)';
 		return this._nextGUID++;
-	}
+	},
+	
+	/**
+     * Converts any iterable (numeric indices and a length property) into a true array
+     * Don't use this on strings. IE doesn't support "abc"[0] which this implementation depends on.
+     * For strings, use this instead: "abc".match(/./g) => [a,b,c];
+     * @param {Iterable} array the iterable object to be turned into a true Array.
+     * @param {Number} start a number that specifies where to start the selection.
+     * @param {Number} end a number that specifies where to end the selection.
+     * @return (Array) array
+     */
+     toArray : function(array, start, end) {
+        return Array.prototype.slice.call(array, start || 0, end || array.length);
+     }
 });
