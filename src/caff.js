@@ -1,51 +1,13 @@
 /*
 CAF
 */
-
 var CAF = {
-    version: 1
-};
+	version: 1,
 
-/**
- *
- * @param dest {Object}
- * @param src {Object}
- * @param conditional {Boolean}
- */
-CAF.cloneTo = function(dest, src, conditional) {
-    var k;
-    if (dest && src && typeof src == 'object') {
-        if (conditional) {
-            for (k in src) {
-                if (! (k in dest)) {
-                    dest[k] = src[k];
-                }
-            }
-        } else {
-            for (k in src) {
-                dest[k] = src[k];
-            }
-        }
-    }
-    return dest;
-};
-
-CAF.cloneTo(CAF, {
     //on DOM ready
-    onReady: function(fn, scope) {},
+    onReady: function(fn, scope) {
+	},
 
-    /**
-	 * 动态绑定函数对象中this的值
-	 *
-	 * @param func {Function}
-	 * @param obj {Object}
-	 * @return {Function}
-	 */
-    bind: function(func, obj) {
-        return function() {
-            return func.apply(obj, arguments);
-        };
-    },
     /**
 	 * 类继承语法封装
 	 *
@@ -73,23 +35,80 @@ CAF.cloneTo(CAF, {
         return clazz;
     },
 
-    /**
-	     * Adds a list of functions to the prototype of an existing class, overwriting any existing methods with the same name.
-	     * Usage:<pre><code>
-	Ext.override(MyClass, {
-	newMethod1: function(){
-	    // etc.
+	/**
+	 * simulate the interface's implemenet
+	 *
+	 * example:
+	 *   var ClassB = CAF.extend(ClassA, {
+	 *   });
+	 *   CAF.implemenet(ClassB, IObservable);
+	 */
+	implemenet: function(clazz/*, ...*/) {
+		var proto = clazz.prototype;
+		for (var i = 1, len = arguments.length; i < len; i++) {
+			var imp = arguments[i];
+			for (var k in imp) {
+				proto[k] = imp[k];
+			}
+		}
 	},
-	newMethod2: function(foo){
-	    // etc.
-	}
-	});
-	       </code></pre>
-	     * @param {Object} origclass The class to override
-	     * @param {Object} overrides The list of functions to add to origClass.  This should be specified as an object literal
-	     * containing one or more methods.
-	     * @method override
-	     */
+
+    /**
+	 * 动态绑定函数对象中this的值
+	 *
+	 * @param func {Function}
+	 * @param obj {Object}
+	 * @return {Function}
+	 */
+    bind: function(func, obj) {
+        return function() {
+            return func.apply(obj, arguments);
+        };
+    },
+
+	/**
+	 *
+	 * @param dest {Object}
+	 * @param src {Object}
+	 * @param conditional {Boolean}
+	 */
+	cloneTo: function(dest, src, conditional) {
+		var k;
+		if (dest && src && typeof src == 'object') {
+		    if (conditional) {
+		        for (k in src) {
+		            if (! (k in dest)) {
+		                dest[k] = src[k];
+		            }
+		        }
+		    } else {
+		        for (k in src) {
+		            dest[k] = src[k];
+		        }
+		    }
+		}
+		return dest;
+	},
+
+    /**
+     * Adds a list of functions to the prototype of an existing class,
+     * overwriting any existing methods with the same name.
+     * Usage:<pre><code>
+		CAF.override(MyClass, {
+			newMethod1: function(){
+			    // etc.
+			},
+			newMethod2: function(foo){
+			    // etc.
+			}
+		});
+       </code></pre>
+     * @param {Object} origclass The class to override
+     * @param {Object} overrides The list of functions to add to origClass.
+	 *                 This should be specified as an object literal containing
+     *                 one or more methods.
+     * @method override
+     */
     override: function(origclass, overrides) {
         CAF.cloneTo(origclass.prototype, overrides, false);
     },
@@ -110,7 +129,6 @@ CAF.cloneTo(CAF, {
         var isNull = value === null,
         emptyArray = (CAF.isArray(value) && !value.length),
         blankAllowed = !allowBlank ? value === '': false;
-
         return isNull || emptyArray || blankAllowed;
     },
 
@@ -224,4 +242,4 @@ CAF.cloneTo(CAF, {
     toArray: function(array, start, end) {
         return Array.prototype.slice.call(array, start || 0, end || array.length);
     }
-});
+};
