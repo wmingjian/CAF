@@ -2,7 +2,12 @@
  * EventTarget
  */
 CAF.EventTarget = CAF.extend(Object, {
-	_eventMaps: {},  //事件映射表
+	init: function(){
+		this._eventMaps = {};  //事件映射表
+	},
+	destroy: function(){
+		//this._eventMaps = null;
+	},
 	addEventListener: function(type, func){
 		if(!this._eventMaps[type]){
 			//TODO 应该使用{}来模拟多个事件执行顺序的无关性
